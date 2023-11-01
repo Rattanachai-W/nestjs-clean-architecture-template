@@ -1,5 +1,6 @@
+/* eslint-disable prettier/prettier */
 import { DynamicModule, Module } from '@nestjs/common';
-import { GetAllUserUseCases } from 'src/applications/use-cases/getAllUsers.usecase';
+import { GetAllUserUseCases } from 'src/use-cases/getAllUsers.usecase';
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 import { RepositoriesModule } from '../repositories/repositories.module';
 import { UserRepositoryOrm } from '../repositories/user.repository';

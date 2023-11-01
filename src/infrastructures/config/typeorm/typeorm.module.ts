@@ -7,7 +7,7 @@ export const getTypeOrmModuleOptions = (
   config: EnvironmentConfigService,
 ): TypeOrmModuleOptions =>
   ({
-    type: 'postgres',
+    type: 'mysql',
     host: config.getDatabaseHost(),
     port: config.getDatabasePort(),
     username: config.getDatabaseUser(),
@@ -16,8 +16,8 @@ export const getTypeOrmModuleOptions = (
     entities: [__dirname + './../../**/*.entity{.ts,.js}'],
     autoLoadEntities: true,
     synchronize: false,
-    schema: process.env.DATABASE_SCHEMA,
-    migrationsRun: true,
+    // schema: process.env.DATABASE_SCHEMA,
+    migrationsRun: false,
     migrations: [__dirname + '/migrations**/*{.ts,.js}'],
     cli: {
       migrationsDir: 'src/migrations',
