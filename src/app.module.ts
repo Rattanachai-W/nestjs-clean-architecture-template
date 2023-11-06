@@ -1,16 +1,19 @@
 import { Module } from '@nestjs/common';
-import { EnvironmentConfigModule } from './infrastructures/config/environment-config/environment-config.module';
 import { UsecaseProxyModule } from './infrastructures/usecase-proxy/usecase-proxy.module';
-import { UserController } from './deliveries/user/user.controller';
 import { ExceptionsModule } from './infrastructures/exceptions/exceptions.module';
 import { DeliveriesModule } from './deliveries/deliveries.module';
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
   imports: [
     UsecaseProxyModule.register(),
     ExceptionsModule,
-    EnvironmentConfigModule,
     DeliveriesModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: `${process.cwd()}/environment/.env.${process.env.NODE_ENV}`,
+    }),
   ],
-  controllers: [UserController],
+  controllers: [],
 })
 export class AppModule {}
