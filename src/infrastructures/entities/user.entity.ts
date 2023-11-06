@@ -10,6 +10,7 @@ import {
 @Entity('users')
 export class User {
   @PrimaryGeneratedColumn('increment')
+  @Index({ unique: true })
   id: number;
 
   @Index({ unique: true })

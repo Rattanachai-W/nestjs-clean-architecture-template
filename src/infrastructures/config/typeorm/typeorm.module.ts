@@ -1,18 +1,30 @@
 import { Module } from '@nestjs/common';
-// import { ConfigModule } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { EnvironmentConfigModule } from '../environment-config/environment-config.module';
+import { EnvironmentConfigService } from '../environment-config/environment-config.service';
+
+export const getTypeOrmModuleOptions = (
+  config: EnvironmentConfigService,
+): TypeOrmModuleOptions =>
+  ({
+    type: 'mysql',
+    host: config.getDatabaseHost(),
+    port: config.getDatabasePort(),
+    username: config.getDatabaseUser(),
+    password: config.getDatabasePassword(),
+    database: config.getDatabaseName(),
+    entities: [__dirname + './../../**/*.entity{.ts,.js}'],
+    synchronize: false,
+    migrationsRun: false,
+    migrations: [__dirname + '/migrations/**/*{.ts,.js}'],
+  } as TypeOrmModuleOptions);
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 8889,
-      username: 'root',
-      password: 'root',
-      database: 'db_test',
-      entities: [],
-      synchronize: true,
+    TypeOrmModule.forRootAsync({
+      imports: [EnvironmentConfigModule],
+      inject: [EnvironmentConfigService],
+      useFactory: getTypeOrmModuleOptions,
     }),
   ],
 })
