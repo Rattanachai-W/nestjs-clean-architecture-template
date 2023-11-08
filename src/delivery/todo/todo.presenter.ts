@@ -21,6 +21,6 @@ export class TodoPresenter {
     this.isDone = todo.isDone;
     this.createdate = todo.createdate;
     this.updateddate = todo.updateddate;
-    this.message = 'success';
+    // this.message = 'success';
   }
 }

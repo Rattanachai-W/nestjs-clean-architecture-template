@@ -4,11 +4,15 @@ import { Repository } from 'typeorm';
 import { TodoModel } from '../../domain/model/todo';
 import { TodoRepository } from '../../domain/repositories/todo.repository';
 import { Todo } from '../entities/todo.entity';
+import { ExceptionsService } from '../exceptions/exceptions.service';
+import { TodoIdNotFoud } from '../config/return-code/response.config';
+
 @Injectable()
 export class TodoCommand implements TodoRepository {
   constructor(
     @InjectRepository(Todo)
     private readonly todoEntityRepository: Repository<Todo>,
+    private readonly exceptionsService: ExceptionsService,
   ) {}
 
   async updateContent(id: number, isDone: boolean): Promise<void> {
@@ -33,6 +37,10 @@ export class TodoCommand implements TodoRepository {
     return this.toTodo(todoEntity);
   }
   async deleteById(id: number): Promise<void> {
+    const checkTodoId = await this.todoEntityRepository.findOneBy({ id: id });
+    if (checkTodoId === null) {
+      this.exceptionsService.badRequestException(TodoIdNotFoud);
+    }
     await this.todoEntityRepository.delete({ id: id });
   }
 

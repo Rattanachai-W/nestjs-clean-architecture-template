@@ -1,6 +1,7 @@
 export interface InterfaceFormatExceptionMessage {
-  message: string;
-  code_error?: number;
+  messageTh: string;
+  messageEng: string;
+  statusCode?: number;
 }
 
 export interface InterfaceException {
