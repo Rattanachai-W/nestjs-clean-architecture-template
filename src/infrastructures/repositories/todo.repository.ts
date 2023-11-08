@@ -54,6 +54,7 @@ export class TodoCommand implements TodoRepository {
     todoEntity.id = todo.id;
     todoEntity.content = todo.content;
     todoEntity.isDone = todo.isDone;
+    todoEntity.createdate = new Date();
 
     return todoEntity;
   }
