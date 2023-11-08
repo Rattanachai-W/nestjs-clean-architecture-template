@@ -17,11 +17,6 @@ import { LoggingInterceptor } from './infrastructure/util/logging.interceptor';
     SuccessResponseModule,
   ],
   controllers: [],
-  providers: [
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: LoggingInterceptor,
-    },
-  ],
+  providers: [],
 })
 export class AppModule {}
