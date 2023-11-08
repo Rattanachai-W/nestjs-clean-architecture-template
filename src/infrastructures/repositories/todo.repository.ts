@@ -4,9 +4,8 @@ import { Repository } from 'typeorm';
 import { TodoM } from '../../domains/model/todo';
 import { TodoRepository } from '../../domains/repositories/todo.repository';
 import { Todo } from '../entities/todo.entity';
-
 @Injectable()
-export class DatabaseTodoRepository implements TodoRepository {
+export class TodoCommand implements TodoRepository {
   constructor(
     @InjectRepository(Todo)
     private readonly todoEntityRepository: Repository<Todo>,
@@ -20,18 +19,19 @@ export class DatabaseTodoRepository implements TodoRepository {
       { isDone: isDone },
     );
   }
-  async insert(todo: TodoM): Promise<void> {
+  async insert(todo: TodoM): Promise<TodoM> {
     const todoEntity = this.toTodoEntity(todo);
-    await this.todoEntityRepository.insert(todoEntity);
+    const result = await this.todoEntityRepository.insert(todoEntity);
+    return this.toTodo(result.generatedMaps[0] as Todo);
   }
   async findAll(): Promise<TodoM[]> {
     const todosEntity = await this.todoEntityRepository.find();
     return todosEntity.map((todoEntity) => this.toTodo(todoEntity));
   }
-  //   async findById(id: number): Promise<TodoM> {
-  //     // const todoEntity = await this.todoEntityRepository.findOneOrFail(id);
-  //     return this.toTodo(todoEntity);
-  //   }
+  async findById(id: number): Promise<TodoM> {
+    const todoEntity = await this.todoEntityRepository.findOneBy({ id: id });
+    return this.toTodo(todoEntity);
+  }
   async deleteById(id: number): Promise<void> {
     await this.todoEntityRepository.delete({ id: id });
   }

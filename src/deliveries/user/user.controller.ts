@@ -21,8 +21,7 @@ export class UserController {
       status: 'OK',
       code: 200,
       message: process.env.DATABASE_NAME,
-      // message2: this.configService.get<string>('DATABASE_NAME'),
-      // data: result,
+      data: result,
     };
   }
 }

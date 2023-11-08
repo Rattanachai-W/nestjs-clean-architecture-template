@@ -3,6 +3,7 @@ import { UsecaseProxyModule } from './infrastructures/usecase-proxy/usecase-prox
 import { ExceptionsModule } from './infrastructures/exceptions/exceptions.module';
 import { DeliveriesModule } from './deliveries/deliveries.module';
 import { EnvironmentConfigModule } from './infrastructures/config/environment-config/environment-config.module';
+import { LoggerModule } from './infrastructures/logger/logger.module';
 
 @Module({
   imports: [
@@ -10,6 +11,7 @@ import { EnvironmentConfigModule } from './infrastructures/config/environment-co
     ExceptionsModule,
     DeliveriesModule,
     EnvironmentConfigModule,
+    LoggerModule,
   ],
   controllers: [],
 })
