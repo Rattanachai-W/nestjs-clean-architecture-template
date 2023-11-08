@@ -34,6 +34,9 @@ export class TodoCommand implements TodoRepository {
   }
   async findById(id: number): Promise<TodoModel> {
     const todoEntity = await this.todoEntityRepository.findOneBy({ id: id });
+    if (todoEntity === null) {
+      this.exceptionsService.badRequestException(TodoIdNotFoud);
+    }
     return this.toTodo(todoEntity);
   }
   async deleteById(id: number): Promise<void> {

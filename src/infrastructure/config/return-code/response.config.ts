@@ -1,4 +1,3 @@
-
 export const success = {
   statusCode: 1000,
   messageTh: 'ทำรายการสำเร็จ',

@@ -5,12 +5,7 @@ import { UsecaseProxyModule } from 'src/infrastructure/usecase-proxy/usecase-pro
 import { ExceptionsModule } from 'src/infrastructure/exceptions/exceptions.module';
 import { LoggerModule } from 'src/infrastructure/logger/logger.module';
 @Module({
-  imports: [
-    UsecaseProxyModule.register(),
-    ExceptionsModule,
-    LoggerModule
-  ],
+  imports: [UsecaseProxyModule.register(), ExceptionsModule, LoggerModule],
   controllers: [UserController, TodoController],
 })
 export class DeliveriesModule {}
-

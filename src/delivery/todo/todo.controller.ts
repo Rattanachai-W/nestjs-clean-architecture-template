@@ -26,14 +26,13 @@ import { TodoPresenter } from './presenter/todo.presenter';
 import { Response } from 'express';
 import { ExceptionsService } from 'src/infrastructure/exceptions/exceptions.service';
 import { success } from '../../infrastructure/config/return-code/response.config';
-import { LoggingInterceptor } from 'src/infrastructure/util/interceptor/logging.interceptor';
-import { HttpExceptionFilter } from 'src/infrastructure/util/http-exception.filter';
+import { LoggingInterceptor } from 'src/infrastructure/utility/interceptor/logging.interceptor';
+import { HttpExceptionFilter } from 'src/infrastructure/utility/filter/http-exception.filter';
+import { LoggerService } from 'src/infrastructure/logger/logger.service';
 
-
-
-@Controller('todo')
-@UseFilters(new HttpExceptionFilter())
+// @UseFilters(new HttpExceptionFilter())
 @UseInterceptors(LoggingInterceptor)
+@Controller('todo')
 export class TodoController {
   constructor(
     @Inject(UsecaseProxyModule.TODO_ADD_USE_CASE)
@@ -48,7 +47,7 @@ export class TodoController {
     private readonly deleteUsecaseProxy: UseCaseProxy<DeleteTodoUseCases>,
 
     private responseService: ExceptionsService,
-  ) { }
+  ) {}
 
   @Post('add')
   async addTodo(@Body() addTodoDto: AddTodoDto, @Res() res: Response) {
@@ -58,19 +57,36 @@ export class TodoController {
       .execute(content);
     return res
       .status(HttpStatus.OK)
-      .send(this.responseService.toResponseSuccess(success, new TodoPresenter(new TodoPresenter(todoCreated))));
+      .send(
+        this.responseService.toResponseSuccess(
+          success,
+          new TodoPresenter(new TodoPresenter(todoCreated)),
+        ),
+      );
   }
 
   @Get('find')
   async getTodo(@Query('id', ParseIntPipe) id: number, @Res() res: Response) {
     const todo = await this.findByIdUsecaseProxy.getInstance().execute(id);
-    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success, new TodoPresenter(todo)));
+    return res
+      .status(HttpStatus.OK)
+      .send(
+        this.responseService.toResponseSuccess(
+          success,
+          new TodoPresenter(todo),
+        ),
+      );
   }
 
   @Get('find/all')
   async getTodos(@Res() res: Response) {
     const todos = await this.findAllUsecaseProxy.getInstance().execute();
-    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success, todos.map((todo) => new TodoPresenter(todo))));
+    return res.status(HttpStatus.OK).send(
+      this.responseService.toResponseSuccess(
+        success,
+        todos.map((todo) => new TodoPresenter(todo)),
+      ),
+    );
     // return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success))
   }
 
@@ -83,7 +99,9 @@ export class TodoController {
       .getInstance()
       .execute(updateStatusDto.id, updateStatusDto.isDone);
 
-    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success));
+    return res
+      .status(HttpStatus.OK)
+      .send(this.responseService.toResponseSuccess(success));
   }
 
   @Delete('delete')
@@ -93,7 +111,8 @@ export class TodoController {
   ) {
     await this.deleteUsecaseProxy.getInstance().execute(id);
 
-    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success));
-
+    return res
+      .status(HttpStatus.OK)
+      .send(this.responseService.toResponseSuccess(success));
   }
 }
