@@ -12,6 +12,10 @@ import {
 
 @Injectable()
 export class ExceptionsService implements InterfaceException {
+  toResponseSuccess(success: InterfaceFormatExceptionMessage, data?: any): InterfaceFormatExceptionMessage {
+    success.data = data
+    return success
+  }
   badRequestException(data: InterfaceFormatExceptionMessage): void {
     throw new BadRequestException(data);
   }

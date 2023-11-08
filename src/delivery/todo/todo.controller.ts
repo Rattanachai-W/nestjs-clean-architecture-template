@@ -20,9 +20,12 @@ import { FindAllUseCases } from '../../use-case/todo/findAllTodo.usecase';
 import { FindOneTodoUsecase } from '../../use-case/todo/findOneTodo.usecases';
 import { UpdateTodoUseCases } from '../../use-case/todo/updateTodo.usecases';
 import { DeleteTodoUseCases } from '../../use-case/todo/deleteTodo.usecases';
-import { TodoPresenter } from './todo.presenter';
+import { TodoPresenter } from './presenter/todo.presenter';
 import { Response } from 'express';
-import { SuccessResponse } from 'src/infrastructure/response/success/success-response.service';
+import { ExceptionsService } from 'src/infrastructure/exceptions/exceptions.service';
+import { success } from '../../infrastructure/config/return-code/response.config';
+
+
 
 @Controller('todo')
 export class TodoController {
@@ -38,8 +41,8 @@ export class TodoController {
     @Inject(UsecaseProxyModule.TODO_DELETE_USE_CASE)
     private readonly deleteUsecaseProxy: UseCaseProxy<DeleteTodoUseCases>,
 
-    private successResponse: SuccessResponse,
-  ) {}
+    private responseService: ExceptionsService,
+  ) { }
 
   @Post('add')
   async addTodo(@Body() addTodoDto: AddTodoDto, @Res() res: Response) {
@@ -49,24 +52,19 @@ export class TodoController {
       .execute(content);
     return res
       .status(HttpStatus.OK)
-      .send(new TodoPresenter(new TodoPresenter(todoCreated)));
+      .send(this.responseService.toResponseSuccess(success, new TodoPresenter(new TodoPresenter(todoCreated))));
   }
 
   @Get('find')
   async getTodo(@Query('id', ParseIntPipe) id: number, @Res() res: Response) {
     const todo = await this.findByIdUsecaseProxy.getInstance().execute(id);
-    return res.status(HttpStatus.OK).send(new TodoPresenter(todo));
+    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success, new TodoPresenter(todo)));
   }
 
   @Get('find/all')
   async getTodos(@Res() res: Response) {
     const todos = await this.findAllUsecaseProxy.getInstance().execute();
-    return res.status(HttpStatus.OK).send({
-      statusCode: 1000,
-      messsageTh: 'สำเร็จ',
-      messsageEng: 'success',
-      data: todos.map((todo) => new TodoPresenter(todo)),
-    });
+    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success, todos.map((todo) => new TodoPresenter(todo))));
   }
 
   @Put('find/update-status')
@@ -78,7 +76,7 @@ export class TodoController {
       .getInstance()
       .execute(updateStatusDto.id, updateStatusDto.isDone);
 
-    return res.status(HttpStatus.OK).send('success');
+    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success));
   }
 
   @Delete('delete')
@@ -88,6 +86,7 @@ export class TodoController {
   ) {
     await this.deleteUsecaseProxy.getInstance().execute(id);
 
-    return res.status(HttpStatus.OK).send('success');
+    return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success));
+
   }
 }

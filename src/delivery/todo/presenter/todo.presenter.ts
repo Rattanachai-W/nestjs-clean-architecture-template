@@ -1,5 +1,5 @@
 // import { ApiProperty } from '@nestjs/swagger';
-import { TodoModel } from '../../domain/model/todo';
+import { TodoModel } from '../../../domain/model/todo';
 
 export class TodoPresenter {
   // @ApiProperty()

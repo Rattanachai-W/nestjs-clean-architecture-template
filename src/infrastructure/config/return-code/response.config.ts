@@ -1,11 +1,12 @@
+
 export const success = {
-  messsageTh: 'สวัสดี',
-  messsageEng: 'Hello',
-  data: '',
+  messageTh: 'ทำรายการสำเร็จ',
+  messageEng: 'Success',
+  statusCode: 1000,
 };
 
 export const TodoIdNotFoud = {
   messageTh: 'ไม่พบไอดี Todo',
   messageEng: 'Todo ID Not Found',
-  statusCode: 1000,
+  statusCode: 3001,
 };

@@ -4,7 +4,6 @@ import { ExceptionsModule } from './infrastructure/exceptions/exceptions.module'
 import { DeliveriesModule } from './delivery/deliveries.module';
 import { EnvironmentConfigModule } from './infrastructure/config/environment-config/environment-config.module';
 import { LoggerModule } from './infrastructure/logger/logger.module';
-import { SuccessResponseModule } from './infrastructure/response/response.module';
 import { LoggingInterceptor } from './infrastructure/util/logging.interceptor';
 
 @Module({
@@ -14,7 +13,6 @@ import { LoggingInterceptor } from './infrastructure/util/logging.interceptor';
     DeliveriesModule,
     EnvironmentConfigModule,
     LoggerModule,
-    SuccessResponseModule,
   ],
   controllers: [],
   providers: [],
