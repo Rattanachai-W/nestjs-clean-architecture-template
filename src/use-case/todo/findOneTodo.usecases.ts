@@ -1,5 +1,5 @@
-import { TodoM } from '../../domains/model/todo';
-import { TodoRepository } from '../../domains/repositories/todo.repository';
+import { TodoM } from '../../domain/model/todo';
+import { TodoRepository } from '../../domain/repositories/todo.repository';
 
 export class FindOneTodoUsecase {
   constructor(private readonly todoRepository: TodoRepository) {}

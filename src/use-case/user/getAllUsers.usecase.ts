@@ -1,5 +1,5 @@
-import { UserM } from 'src/domains/model/user';
-import { UserRepository } from 'src/domains/repositories/user.repository';
+import { UserM } from 'src/domain/model/user';
+import { UserRepository } from 'src/domain/repositories/user.repository';
 
 export class GetAllUserUseCases {
   constructor(private usersRepository: UserRepository) {}

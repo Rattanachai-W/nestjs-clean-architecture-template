@@ -1,17 +1,19 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { TodoM } from '../../domains/model/todo';
+// import { ApiProperty } from '@nestjs/swagger';
+import { TodoM } from '../../domain/model/todo';
 
 export class TodoPresenter {
-  @ApiProperty()
+  // @ApiProperty()
   id: number;
-  @ApiProperty()
+  // @ApiProperty()
   content: string;
-  @ApiProperty()
+  // @ApiProperty()
   isDone: boolean;
-  @ApiProperty()
+  // @ApiProperty()
   createdate: Date;
-  @ApiProperty()
+  // @ApiProperty()
   updateddate: Date;
+  // @ApiProperty()
+  message: string;
 
   constructor(todo: TodoM) {
     this.id = todo.id;
@@ -19,5 +21,6 @@ export class TodoPresenter {
     this.isDone = todo.isDone;
     this.createdate = todo.createdate;
     this.updateddate = todo.updateddate;
+    this.message = 'success';
   }
 }

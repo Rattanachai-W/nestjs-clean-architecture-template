@@ -1,8 +1,8 @@
 import { Controller, Get, Inject } from '@nestjs/common';
-import { GetAllUserUseCases } from 'src/use-cases/getAllUsers.usecase';
-import { UseCaseProxy } from 'src/infrastructures/usecase-proxy/usecase-proxy';
-import { UsecaseProxyModule } from 'src/infrastructures/usecase-proxy/usecase-proxy.module';
-import { ExceptionsService } from 'src/infrastructures/exceptions/exceptions.service';
+import { GetAllUserUseCases } from 'src/use-case/user/getAllUsers.usecase';
+import { UseCaseProxy } from 'src/infrastructure/usecase-proxy/usecase-proxy';
+import { UsecaseProxyModule } from 'src/infrastructure/usecase-proxy/usecase-proxy.module';
+import { ExceptionsService } from 'src/infrastructure/exceptions/exceptions.service';
 // import { ConfigService } from '@nestjs/config';
 
 @Controller('users')
