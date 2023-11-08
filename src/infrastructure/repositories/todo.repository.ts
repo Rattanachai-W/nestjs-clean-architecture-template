@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { TodoM } from '../../domain/model/todo';
+import { TodoModel } from '../../domain/model/todo';
 import { TodoRepository } from '../../domain/repositories/todo.repository';
 import { Todo } from '../entities/todo.entity';
 @Injectable()
@@ -19,16 +19,16 @@ export class TodoCommand implements TodoRepository {
       { isDone: isDone },
     );
   }
-  async insert(todo: TodoM): Promise<TodoM> {
+  async insert(todo: TodoModel): Promise<TodoModel> {
     const todoEntity = this.toTodoEntity(todo);
     const result = await this.todoEntityRepository.insert(todoEntity);
     return this.toTodo(result.generatedMaps[0] as Todo);
   }
-  async findAll(): Promise<TodoM[]> {
+  async findAll(): Promise<TodoModel[]> {
     const todosEntity = await this.todoEntityRepository.find();
     return todosEntity.map((todoEntity) => this.toTodo(todoEntity));
   }
-  async findById(id: number): Promise<TodoM> {
+  async findById(id: number): Promise<TodoModel> {
     const todoEntity = await this.todoEntityRepository.findOneBy({ id: id });
     return this.toTodo(todoEntity);
   }
@@ -36,8 +36,8 @@ export class TodoCommand implements TodoRepository {
     await this.todoEntityRepository.delete({ id: id });
   }
 
-  private toTodo(todoEntity: Todo): TodoM {
-    const todo: TodoM = new TodoM();
+  private toTodo(todoEntity: Todo): TodoModel {
+    const todo: TodoModel = new TodoModel();
 
     todo.id = todoEntity.id;
     todo.content = todoEntity.content;
@@ -48,7 +48,7 @@ export class TodoCommand implements TodoRepository {
     return todo;
   }
 
-  private toTodoEntity(todo: TodoM): Todo {
+  private toTodoEntity(todo: TodoModel): Todo {
     const todoEntity: Todo = new Todo();
 
     todoEntity.id = todo.id;

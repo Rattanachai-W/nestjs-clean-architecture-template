@@ -1,9 +1,9 @@
-import { TodoM } from '../model/todo';
+import { TodoModel } from '../model/todo';
 
 export interface TodoRepository {
-  insert(todo: TodoM): Promise<TodoM>;
-  findAll(): Promise<TodoM[]>;
-  findById(id: number): Promise<TodoM>;
+  insert(todo: TodoModel): Promise<TodoModel>;
+  findAll(): Promise<TodoModel[]>;
+  findById(id: number): Promise<TodoModel>;
   updateContent(id: number, isDone: boolean): Promise<void>;
   deleteById(id: number): Promise<void>;
 }

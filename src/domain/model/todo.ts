@@ -1,4 +1,4 @@
-export class TodoM {
+export class TodoModel {
   id: number;
   content: string;
   isDone: boolean;

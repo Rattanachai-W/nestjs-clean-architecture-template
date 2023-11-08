@@ -6,22 +6,22 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import {
-  IException,
-  IFormatExceptionMessage,
+  InterfaceException,
+  InterfaceFormatExceptionMessage,
 } from '../../domain/exceptions/exceptions.interface';
 
 @Injectable()
-export class ExceptionsService implements IException {
-  badRequestException(data: IFormatExceptionMessage): void {
+export class ExceptionsService implements InterfaceException {
+  badRequestException(data: InterfaceFormatExceptionMessage): void {
     throw new BadRequestException(data);
   }
-  internalServerErrorException(data?: IFormatExceptionMessage): void {
+  internalServerErrorException(data?: InterfaceFormatExceptionMessage): void {
     throw new InternalServerErrorException(data);
   }
-  forbiddenException(data?: IFormatExceptionMessage): void {
+  forbiddenException(data?: InterfaceFormatExceptionMessage): void {
     throw new ForbiddenException(data);
   }
-  UnauthorizedException(data?: IFormatExceptionMessage): void {
+  UnauthorizedException(data?: InterfaceFormatExceptionMessage): void {
     throw new UnauthorizedException(data);
   }
 }
