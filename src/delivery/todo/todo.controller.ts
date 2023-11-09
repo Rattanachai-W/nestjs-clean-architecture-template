@@ -10,8 +10,6 @@ import {
   Res,
   HttpStatus,
   Delete,
-  UseInterceptors,
-  UseFilters,
 } from '@nestjs/common';
 import { UseCaseProxy } from '../../infrastructure/usecase-proxy/usecase-proxy';
 import { UsecaseProxyModule } from '../../infrastructure/usecase-proxy/usecase-proxy.module';
@@ -26,12 +24,7 @@ import { TodoPresenter } from './presenter/todo.presenter';
 import { Response } from 'express';
 import { ExceptionsService } from 'src/infrastructure/exceptions/exceptions.service';
 import { success } from '../../infrastructure/config/return-code/response.config';
-import { LoggingInterceptor } from 'src/infrastructure/utility/interceptor/logging.interceptor';
-import { HttpExceptionFilter } from 'src/infrastructure/utility/filter/http-exception.filter';
-import { LoggerService } from 'src/infrastructure/logger/logger.service';
 
-// @UseFilters(new HttpExceptionFilter())
-@UseInterceptors(LoggingInterceptor)
 @Controller('todo')
 export class TodoController {
   constructor(
@@ -87,7 +80,6 @@ export class TodoController {
         todos.map((todo) => new TodoPresenter(todo)),
       ),
     );
-    // return res.status(HttpStatus.OK).send(this.responseService.toResponseSuccess(success))
   }
 
   @Put('find/update-status')

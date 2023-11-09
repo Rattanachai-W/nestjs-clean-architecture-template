@@ -13,7 +13,7 @@ async function bootstrap() {
   // app.useGlobalFilters(new HttpExceptionFilter());
 
   app.useGlobalInterceptors(new TimeoutInterceptor());
-  app.useGlobalInterceptors(new LoggingInterceptor(new LoggerService()));
+  // app.useGlobalInterceptors(new LoggingInterceptor(new LoggerService()));
 
   app.useGlobalPipes(new ValidationPipe());
   await app.listen(3000);

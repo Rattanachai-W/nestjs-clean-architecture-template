@@ -19,16 +19,15 @@ export class LoggingInterceptor implements NestInterceptor {
     const request = httpContext.getRequest();
 
     const ip = this.getIP(request);
-    const uuid = randomUUID();
 
-    this.logger.log(
-      `ID : ${uuid}` + ` | Incoming Request on ${request.path}`,
+    this.logger.verbose(
+      `Incoming Request on ${request.path}`,
       `method=${request.method} ip=${ip}`,
     );
 
     return next.handle().pipe(
       tap(() => {
-        this.logger.log(
+        this.logger.verbose(
           `End Request for ${request.path}`,
           `method=${request.method} ip=${ip} duration=${Date.now() - now}ms`,
         );
