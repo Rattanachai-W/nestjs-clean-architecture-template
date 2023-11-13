@@ -5,7 +5,7 @@ import { ExceptionsModule } from 'src/infrastructure/exceptions/exceptions.modul
 import { LoggerModule } from 'src/infrastructure/logger/logger.module';
 import { CacheController } from './cache-example/cache.controller';
 import { HttpModule } from '@nestjs/axios';
-import { HealthModule } from './health-check/health.module';
+import { HealthModule } from './helth-check/helth-check.module';
 
 @Module({
   imports: [

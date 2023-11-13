@@ -12,7 +12,9 @@ export class TodoCommand implements TodoRepository {
   constructor(
     @InjectRepository(Todo)
     private readonly todoEntityRepository: Repository<Todo>,
-    private readonly exceptionsService: ExceptionsService<any>,
+    private readonly exceptionsService: ExceptionsService<
+      TodoModel | TodoModel[]
+    >,
   ) {}
 
   async updateContent(id: number, isDone: boolean): Promise<void> {

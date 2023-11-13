@@ -12,12 +12,20 @@ export class HealthController {
     private http: HttpHealthIndicator,
   ) {}
 
+  @Get('/check')
+  check() {
+    return 'Hello World';
+  }
   @Get()
   @HealthCheck()
-  check() {
+  intitailHeath() {
     return this.health.check([
       () =>
-        this.http.pingCheck('Self Check', 'http://localhost:3000/api/health'),
+        this.http.pingCheck(
+          'Helth Check',
+          'http://localhost:3000/api/health/check',
+        ),
+      () => this.http.pingCheck('nestjs-docs', 'https://docs.nestjs.com'),
     ]);
   }
 }
