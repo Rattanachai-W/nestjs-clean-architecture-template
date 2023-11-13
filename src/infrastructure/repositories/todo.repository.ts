@@ -26,7 +26,6 @@ export class TodoCommand implements TodoRepository {
   async insert(todo: TodoModel): Promise<TodoModel> {
     const todoEntity = this.toTodoEntity(todo);
     const result = await this.todoEntityRepository.insert(todoEntity);
-    console.log('xcxcxc', result.generatedMaps[0]);
     return this.toTodo(result.generatedMaps[0] as Todo);
   }
   async findAll(): Promise<TodoModel[]> {

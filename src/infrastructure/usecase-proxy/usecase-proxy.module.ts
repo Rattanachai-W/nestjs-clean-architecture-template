@@ -1,8 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { DynamicModule, Module } from '@nestjs/common';
-import { GetAllUserUseCases } from '../../use-case/user/getAllUsers.usecase';
 import { RepositoriesModule } from '../repositories/repositories.module';
-import { UserRepositoryOrm } from '../repositories/user.repository';
 import { TodoCommand } from '../repositories/todo.repository';
 import { UseCaseProxy } from './usecase-proxy';
 import { addTodoUseCases } from '../../use-case/todo/addTodo.usecases';
@@ -17,7 +15,6 @@ import { EnvironmentConfigModule } from '../config/environment-config/environmen
   imports: [RepositoriesModule, LoggerModule, EnvironmentConfigModule, ],
 })
 export class UsecaseProxyModule {
-  static GET_ALL_USERS_USE_CASE = 'getAllUsersUsecaseProxy';
 
   static TODO_ADD_USE_CASE = 'todoAddUseCase';
   static TODO_FIND_ONE_USE_CASE = 'todoFineOneUseCase';
@@ -29,12 +26,7 @@ export class UsecaseProxyModule {
     return {
       module: UsecaseProxyModule,
       providers: [
-        {
-          inject: [UserRepositoryOrm],
-          provide: UsecaseProxyModule.GET_ALL_USERS_USE_CASE,
-          useFactory: (userRepository: UserRepositoryOrm) =>
-            new UseCaseProxy(new GetAllUserUseCases(userRepository)),
-        },
+
 
         {
           inject: [LoggerService, TodoCommand],
@@ -68,7 +60,6 @@ export class UsecaseProxyModule {
         },
       ],
       exports: [
-        UsecaseProxyModule.GET_ALL_USERS_USE_CASE,
         UsecaseProxyModule.TODO_ADD_USE_CASE,
         UsecaseProxyModule.TODO_DELETE_USE_CASE,
         UsecaseProxyModule.TODO_FIND_ALL_USE_CASE,
