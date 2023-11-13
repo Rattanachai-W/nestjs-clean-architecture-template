@@ -38,8 +38,8 @@ export class TodoController {
     private readonly updateUsacaseProxy: UseCaseProxy<UpdateTodoUseCases>,
     @Inject(UsecaseProxyModule.TODO_DELETE_USE_CASE)
     private readonly deleteUsecaseProxy: UseCaseProxy<DeleteTodoUseCases>,
-
-    private responseService: ExceptionsService,
+    private responseService: ExceptionsService<TodoPresenter>,
+    private responseServiceArray: ExceptionsService<TodoPresenter[]>,
   ) {}
 
   @Post('add')
@@ -75,7 +75,7 @@ export class TodoController {
   async getTodos(@Res() res: Response) {
     const todos = await this.findAllUsecaseProxy.getInstance().execute();
     return res.status(HttpStatus.OK).send(
-      this.responseService.toResponseSuccess(
+      this.responseServiceArray.toResponseSuccess(
         success,
         todos.map((todo) => new TodoPresenter(todo)),
       ),
