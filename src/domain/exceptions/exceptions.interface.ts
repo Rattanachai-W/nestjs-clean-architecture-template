@@ -1,7 +1,7 @@
 export interface InterfaceFormatExceptionMessage {
   messageTh: string;
   messageEng: string;
-  data? : any;
+  data?: any;
   statusCode?: number;
 }
 

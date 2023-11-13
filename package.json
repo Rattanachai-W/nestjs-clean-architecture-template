@@ -23,6 +23,7 @@
     "typeorm_src": "typeorm-ts-node-commonjs -d src/infrastructures/config/typeorm/typeorm.config.ts"
   },
   "dependencies": {
+    "@golevelup/ts-jest": "^0.4.0",
     "@nestjs/axios": "^3.0.1",
     "@nestjs/cache-manager": "^2.1.1",
     "@nestjs/common": "^9.0.0",
@@ -52,7 +53,7 @@
   "devDependencies": {
     "@nestjs/cli": "^9.0.0",
     "@nestjs/schematics": "^9.0.0",
-    "@nestjs/testing": "^9.0.0",
+    "@nestjs/testing": "^9.4.3",
     "@types/express": "^4.17.13",
     "@types/jest": "29.2.4",
     "@types/node": "18.11.18",

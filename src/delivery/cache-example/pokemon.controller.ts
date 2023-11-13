@@ -12,7 +12,7 @@ import { HttpService } from '@nestjs/axios';
 import { Cache } from 'cache-manager';
 
 @Controller('pokemon')
-export class PokemonContrller {
+export class PokemonController {
   constructor(
     private readonly httpService: HttpService,
     @Inject(CACHE_MANAGER) private cacheService: Cache,
@@ -21,7 +21,7 @@ export class PokemonContrller {
   @UseInterceptors(CacheInterceptor)
   @CacheTTL(5) //TTL to 5s override seconds
   @Get('find')
-  async getTodo(@Query('id', ParseIntPipe) id: number): Promise<any> {
+  async getPokemonById(@Query('id', ParseIntPipe) id: number): Promise<any> {
     const CheckData = await this.cacheService.get(id.toString());
     console.log('CheckData', CheckData);
 
