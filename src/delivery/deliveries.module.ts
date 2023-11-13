@@ -6,7 +6,7 @@ import { LoggerModule } from 'src/infrastructure/logger/logger.module';
 import { CacheController } from './cache-example/cache.controller';
 import { HttpModule } from '@nestjs/axios';
 import { HealthModule } from './helth-check/helth-check.module';
-
+import { CacheExampleModule } from './cache-example/cache.module';
 @Module({
   imports: [
     UsecaseProxyModule.register(),
@@ -16,6 +16,7 @@ import { HealthModule } from './helth-check/helth-check.module';
       timeout: 5000,
     }),
     HealthModule,
+    CacheExampleModule,
   ],
   controllers: [TodoController, CacheController],
 })
