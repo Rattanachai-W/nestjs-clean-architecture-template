@@ -18,7 +18,7 @@ export class HealthController {
   }
   @Get()
   @HealthCheck()
-  intitailHeath() {
+  listHeath() {
     return this.health.check([
       () =>
         this.http.pingCheck(
