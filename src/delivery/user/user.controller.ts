@@ -3,8 +3,6 @@ import { Controller, Get } from '@nestjs/common';
 export class UserController {
   @Get('')
   async getAllUsers() {
-    // const result = await this.getUserUsecaseProxy.getInstance().execute();
-
     return 'ok';
   }
 }

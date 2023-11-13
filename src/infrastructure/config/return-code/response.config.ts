@@ -15,3 +15,14 @@ export const InternaleServerError = {
   messageTh: 'เกิดข้อผิดพลาดในระบบ',
   messageEng: 'Internal server error',
 };
+
+export const forbiddenError = {
+  statusCode: 3002,
+  messageTh: 'เกิดข้อผิดพลาดในระบบ',
+  messageEng: 'Forbidden',
+};
+export const UnauthorizedError = {
+  statusCode: 3003,
+  messageTh: 'เกิดข้อผิดพลาดในระบบ',
+  messageEng: 'Unauthorized',
+};

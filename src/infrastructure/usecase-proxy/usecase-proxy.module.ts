@@ -1,20 +1,20 @@
 /* eslint-disable prettier/prettier */
 import { DynamicModule, Module } from '@nestjs/common';
-import { GetAllUserUseCases } from 'src/use-case/user/getAllUsers.usecase';
+import { GetAllUserUseCases } from '../../use-case/user/getAllUsers.usecase';
 import { RepositoriesModule } from '../repositories/repositories.module';
 import { UserRepositoryOrm } from '../repositories/user.repository';
 import { TodoCommand } from '../repositories/todo.repository';
 import { UseCaseProxy } from './usecase-proxy';
-import { addTodoUseCases } from 'src/use-case/todo/addTodo.usecases';
-import { FindOneTodoUsecase } from 'src/use-case/todo/findOneTodo.usecases';
-import { FindAllUseCases } from 'src/use-case/todo/findAllTodo.usecase';
-import { UpdateTodoUseCases } from 'src/use-case/todo/updateTodo.usecases';
-import { DeleteTodoUseCases } from 'src/use-case/todo/deleteTodo.usecases';
+import { addTodoUseCases } from '../../use-case/todo/addTodo.usecases';
+import { FindOneTodoUsecase } from '../../use-case/todo/findOneTodo.usecases';
+import { FindAllUseCases } from '../../use-case/todo/findAllTodo.usecase';
+import { UpdateTodoUseCases } from '../../use-case/todo/updateTodo.usecases';
+import { DeleteTodoUseCases } from '../../use-case/todo/deleteTodo.usecases';
 import { LoggerModule } from '../logger/logger.module';
 import { LoggerService } from '../logger/logger.service';
 import { EnvironmentConfigModule } from '../config/environment-config/environment-config.module';
 @Module({
-  imports: [RepositoriesModule, LoggerModule, EnvironmentConfigModule],
+  imports: [RepositoriesModule, LoggerModule, EnvironmentConfigModule, ],
 })
 export class UsecaseProxyModule {
   static GET_ALL_USERS_USE_CASE = 'getAllUsersUsecaseProxy';

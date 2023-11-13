@@ -22,7 +22,7 @@ import { UpdateTodoUseCases } from '../../use-case/todo/updateTodo.usecases';
 import { DeleteTodoUseCases } from '../../use-case/todo/deleteTodo.usecases';
 import { TodoPresenter } from './presenter/todo.presenter';
 import { Response } from 'express';
-import { ExceptionsService } from 'src/infrastructure/exceptions/exceptions.service';
+import { ExceptionsService } from '../../infrastructure/exceptions/exceptions.service';
 import { success } from '../../infrastructure/config/return-code/response.config';
 
 @Controller('todo')
