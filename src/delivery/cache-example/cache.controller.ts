@@ -12,7 +12,7 @@ import { HttpService } from '@nestjs/axios';
 import { Cache } from 'cache-manager';
 
 @Controller('pokemon')
-export class PokemonController {
+export class CacheController {
   constructor(
     private readonly httpService: HttpService,
     @Inject(CACHE_MANAGER) private cacheService: Cache,
